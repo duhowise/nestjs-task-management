@@ -12,6 +12,12 @@ export class TasksService {
   }
   getTaskById(id: string): Task {
     return this.tasks.find(task => task.id === id);
+  } 
+  
+  
+  changeTaskStatus(id: string,status:TaskStatus) {
+    const taskToUpdate= this.tasks.find(task => task.id === id);
+    taskToUpdate.status=status;
   }
 
   createTask(createTask: CreateTaskDto): Task {
@@ -24,5 +30,10 @@ export class TasksService {
     };
     this.tasks.push(task);
     return task;
+  }
+
+  deleteTask(id: string) {
+    const indexToDelete = this.tasks.findIndex(task => task.id === id);
+    this.tasks.splice(indexToDelete);
   }
 }
